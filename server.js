@@ -51,6 +51,7 @@ io.on('connection', (socket) => {
 	// Listen for chat message
 	socket.on('chatMessage', (msg) => {
 		const user = getCurrentuser(socket.id);
+		if (user.room === undefined) return;
 		io.to(user.room).emit('message', formatMessage(user.username, msg));
 	});
 
